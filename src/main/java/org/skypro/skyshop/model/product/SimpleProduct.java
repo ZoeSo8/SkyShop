@@ -34,11 +34,11 @@ public class SimpleProduct extends Product {
 
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(super.getNamedAbs(), priceSimple);
+        return java.util.Objects.hash(super.getName(), priceSimple);
     }
 
     @Override
     public String toString() {
-        return "Наименование " + super.getNamedAbs() + " Цена" +getPrice();
+        return "Наименование " + super.getName() + " Цена" +getPrice();
     }
 }

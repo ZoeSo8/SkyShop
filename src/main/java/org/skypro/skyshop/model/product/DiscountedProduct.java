@@ -8,24 +8,27 @@ public class DiscountedProduct extends Product {
     private double discountPricePercent;
     private double discountPrice;
 
-    public DiscountedProduct(String namedAbs, UUID id,int basePrice, double discountPricePercent) {
-        super(namedAbs,id);
+    public DiscountedProduct(String namedAbs, UUID id, int basePrice, double discountPricePercent) {
+        super(namedAbs, id);
         this.basePrice = basePrice;
-        if (basePrice<=0) {
-            throw new IllegalArgumentException("Цена должна быть строго больше 0");}
+        if (basePrice <= 0) {
+            throw new IllegalArgumentException("Цена должна быть строго больше 0");
+        }
         this.discountPricePercent = (double) discountPricePercent;
-        if (discountPricePercent<0 && discountPricePercent>100){
-           throw  new IllegalArgumentException("Скидка должна быть в диапазоне от 0 до 100%");}
+        if (discountPricePercent < 0 && discountPricePercent > 100) {
+            throw new IllegalArgumentException("Скидка должна быть в диапазоне от 0 до 100%");
+        }
     }
+
     @Override
     public int getPrice() {
-        double discount = (basePrice*discountPricePercent)/100;
-        return (int) (discountPrice =basePrice-discount);
+        double discount = (basePrice * discountPricePercent) / 100;
+        return (int) (discountPrice = basePrice - discount);
     }
 
     @Override
     public String toString() {
-        return this.getNamedAbs()+": стоимость "+this.getPrice() + " (скидка "+discountPricePercent+ "%)";
+        return this.getName() + ": стоимость " + this.getPrice() + " (скидка " + discountPricePercent + "%)";
     }
 
     @Override

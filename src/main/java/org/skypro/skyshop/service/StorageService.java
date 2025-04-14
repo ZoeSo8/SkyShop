@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-import static sun.rmi.registry.RegistryImpl.getID;
-
 @Service
 
 public class StorageService {
@@ -44,7 +42,7 @@ public class StorageService {
         return searchableItems;
     }
 
-privat void addProductArticle () {
+private void addProductArticle () {
 
 
         Product pen = new SimpleProduct("Ручка", UUID.randomUUID(),100);
@@ -54,8 +52,10 @@ privat void addProductArticle () {
         Product pencil = new SimpleProduct("Карандаш", UUID.randomUUID(),50);
         Product marker = new SimpleProduct("Маркер", UUID.randomUUID(),300);
         Product slimeFix = new FixPriceProduct("Слайм",UUID.randomUUID());
-        Product penDiscount = new DiscountedProduct(pen.getNamedAbs(), UUID.randomUUID(),100, 20);
+        Product penDiscount = new DiscountedProduct(pen.getName(), UUID.randomUUID(),100, 20);
         this.productStorage.put(pen.getId(),pen);
+        this.productStorage.put(book.getId(),book);
+        this.productStorage.put(sticker.getId(),sticker);
 
 
         Article penDescribe = new Article("Описание ручки", "Гелевая черная",UUID.randomUUID());

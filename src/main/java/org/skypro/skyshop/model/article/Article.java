@@ -1,8 +1,10 @@
 package org.skypro.skyshop.model.article;
 
-import net.minidev.json.annotate.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.skypro.skyshop.model.search.Searchable;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -29,6 +31,11 @@ public class Article implements Searchable {
     public UUID getId() {return id;}
 
     @Override
+    public String getName() {
+        return title;
+    }
+
+    @Override
     public String toString() {
         return "Название статьи: " + this.title+"\nТекст статьи: " + this.text;
     }
@@ -49,16 +56,14 @@ public class Article implements Searchable {
     @Override
     @JsonIgnore
     public String gettingContentType() {
-        return toString();
-    }
-
-    @Override
-    @JsonIgnore
-    public String searchTerm() {
         return "ARTICLE";
     }
 
+    @Override
+    public String getSearchTerm() {
+        return toString();
+    }
 
-}
+   }
 
 
