@@ -16,52 +16,56 @@ public class StorageService {
     private final Map<UUID, Product> productStorage;
     private final Map<UUID, Article> articleStorage;
 
-    public StorageService (){
+    public StorageService() {
         this.productStorage = new TreeMap<>();
         this.articleStorage = new TreeMap<>();
         addProductArticle();
 
     }
-       public Collection<Article> getAllArticles() {
+
+    public Collection<Article> getAllArticles() {
         return articleStorage.values();
     }
-    public Optional <Article> getArticleById (UUID id){
+
+    public Optional<Article> getArticleById(UUID id) {
         return Optional.ofNullable(articleStorage.get(id));
     }
 
     public Collection<Product> getAllProducts() {
         return productStorage.values();
     }
+
     public Optional<Product> getProductById(UUID id) {
-        return Optional.ofNullable(productStorage.get(id));
-    }
-    public Collection<Searchable> getSearchableItems(){
+
+        return Optional.ofNullable(productStorage.get(id));}
+
+    public Collection<Searchable> getSearchableItems() {
         List<Searchable> searchableItems = new ArrayList<>();
         searchableItems.addAll(this.productStorage.values());
         searchableItems.addAll(this.articleStorage.values());
         return searchableItems;
     }
 
-private void addProductArticle () {
+    private void addProductArticle() {
 
 
-        Product pen = new SimpleProduct("Ручка", UUID.randomUUID(),100);
-        Product book = new SimpleProduct("Книга",UUID.randomUUID(), 500);
-        Product box = new SimpleProduct("Коробка", UUID.randomUUID(),200);
-        Product sticker = new SimpleProduct("Стикер", UUID.randomUUID(),150);
-        Product pencil = new SimpleProduct("Карандаш", UUID.randomUUID(),50);
-        Product marker = new SimpleProduct("Маркер", UUID.randomUUID(),300);
-        Product slimeFix = new FixPriceProduct("Слайм",UUID.randomUUID());
-        Product penDiscount = new DiscountedProduct(pen.getName(), UUID.randomUUID(),100, 20);
-        this.productStorage.put(pen.getId(),pen);
-        this.productStorage.put(book.getId(),book);
-        this.productStorage.put(sticker.getId(),sticker);
+        Product pen = new SimpleProduct("Ручка", UUID.randomUUID(), 100);
+        Product book = new SimpleProduct("Книга", UUID.randomUUID(), 500);
+        Product box = new SimpleProduct("Коробка", UUID.randomUUID(), 200);
+        Product sticker = new SimpleProduct("Стикер", UUID.randomUUID(), 150);
+        Product pencil = new SimpleProduct("Карандаш", UUID.randomUUID(), 50);
+        Product marker = new SimpleProduct("Маркер", UUID.randomUUID(), 300);
+        Product slimeFix = new FixPriceProduct("Слайм", UUID.randomUUID());
+        Product penDiscount = new DiscountedProduct(pen.getName(), UUID.randomUUID(), 100, 20);
+        this.productStorage.put(pen.getId(), pen);
+        this.productStorage.put(book.getId(), book);
+        this.productStorage.put(sticker.getId(), sticker);
 
 
-        Article penDescribe = new Article("Описание ручки", "Гелевая черная",UUID.randomUUID());
-        Article pencilDescribe = new Article("Описание карандаш", "Меловой синий",UUID.randomUUID());
-        Article boxDescribe = new Article("Описание коробки", "Малая подарочная",UUID.randomUUID());
-        Article markerDescribe = new Article("Описание маркер", "Широкий синий",UUID.randomUUID());
-        this.articleStorage.put(pencilDescribe.getId(),pencilDescribe);
+        Article penDescribe = new Article("Описание ручки", "Гелевая черная", UUID.randomUUID());
+        Article pencilDescribe = new Article("Описание карандаш", "Меловой синий", UUID.randomUUID());
+        Article boxDescribe = new Article("Описание коробки", "Малая подарочная", UUID.randomUUID());
+        Article markerDescribe = new Article("Описание маркер", "Широкий синий", UUID.randomUUID());
+        this.articleStorage.put(pencilDescribe.getId(), pencilDescribe);
     }
 }
