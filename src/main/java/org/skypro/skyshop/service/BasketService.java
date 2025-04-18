@@ -1,5 +1,6 @@
 package org.skypro.skyshop.service;
 
+import org.skypro.skyshop.exception.NoSuchProductException;
 import org.skypro.skyshop.model.basket.BasketItem;
 import org.skypro.skyshop.model.basket.ProductBasket;
 import org.skypro.skyshop.model.basket.UserBasket;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,24 +23,26 @@ public class BasketService {
         this.productBasket = productBasket;
         this.storageService = storageService;
     }
-  public void addProductInBasketToId(UUID id){
-      storageService.getProductById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Продукт с ID " + id + " не найден"));
-      productBasket.addProduct(id);
-  }
+
+    public void addProductInBasketToId(UUID id) {
+        storageService.getProductById(id)
+                .orElseThrow(() -> new NoSuchProductException(id));
+        productBasket.addProduct(id);
+    }
+
     public UserBasket getUserBasket() {
         List<BasketItem> items = productBasket.getAllProductBasket()
                 .entrySet()
                 .stream()
                 .map(entry -> {
                     Product product = storageService.getProductById(entry.getKey())
-                            .orElseThrow(() -> new IllegalStateException("Такого продукта нет в наличии"));
+                            .orElseThrow(() -> new NoSuchProductException(entry.getKey()));
                     return new BasketItem(product, entry.getValue());
                 })
                 .collect(Collectors.toList());
         return new UserBasket(items);
     }
 
-  }
+}
 
 

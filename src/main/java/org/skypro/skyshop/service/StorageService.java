@@ -17,8 +17,8 @@ public class StorageService {
     private final Map<UUID, Article> articleStorage;
 
     public StorageService() {
-        this.productStorage = new TreeMap<>();
-        this.articleStorage = new TreeMap<>();
+        this.productStorage = new HashMap<>();
+        this.articleStorage = new HashMap<>();
         addProductArticle();
 
     }
